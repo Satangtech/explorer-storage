@@ -4,7 +4,7 @@ WORKDIR /service-storage
 COPY ./package*.json ./
 RUN npm i
 
-COPY ./service-storage ./
+COPY . .
 RUN mkdir -p /service-storage/contracts
 RUN npm run build
 

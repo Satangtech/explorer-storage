@@ -8,6 +8,8 @@ services:
       - REDIS_URL=redis://redis:6379
     volumes:
       - ./.env:/service-storage/.env
+    ports:
+      - 5555:5555
     depends_on:
       - redis
 

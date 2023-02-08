@@ -1,14 +1,17 @@
 FROM node:18-alpine3.14
 
-USER node
-WORKDIR /home/node/service-storage
-RUN chown -R node:node /home/node/service-storage
+RUN addgroup -S storage && adduser -S storage -G storage
+USER storage
 
-COPY --chown=node:node ./package*.json ./
+WORKDIR /service-storage
+RUN chown -R storage:storage /service-storage
+
+COPY --chown=storage:storage ./package*.json ./
 RUN npm i
 
-COPY --chown=node:node . .
-RUN mkdir -p /home/node/service-storage/contracts
+COPY --chown=storage:storage . .
+RUN mkdir -p /service-storage/contracts
+RUN chown -R storage:storage /service-storage/contracts
 RUN npm run build
 
 EXPOSE 5555

@@ -3,9 +3,6 @@ FROM node:18-alpine3.14
 RUN addgroup -S storage && adduser -S storage -G storage
 USER storage
 
-ENV NPM_CONFIG_PREFIX=/home/node/.npm-global
-ENV PATH=$PATH:/home/node/.npm-global/bin
-
 WORKDIR /service-storage
 RUN chown -R storage:storage /service-storage
 
